@@ -1,0 +1,14 @@
+[ISAPI_Rewrite]
+# 3600 = 1 hour
+CacheClockRate 3600
+RepeatLimit 32
+# Protect httpd.ini and httpd.parse.errors files
+# from accessing through HTTP
+# Rules to ensure that normal content gets through
+RewriteRule /sitemap.xml /sitemap.xml [L]
+RewriteRule /favicon.ico /favicon.ico [L]
+# For file-based wordpress content (i.e. theme), admin, etc.
+RewriteRule /wp-(.*) /wp-$1 [L]
+# For normal wordpress content, via index.php
+RewriteRule ^/$ /index.php [L]
+RewriteRule /(.*) /index.php/$1 [L]
